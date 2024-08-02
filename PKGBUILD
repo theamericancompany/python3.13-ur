@@ -2,12 +2,12 @@
 # Maintained at https://github.com/rixx/pkgbuilds, feel free to submit patches
 
 pkgname=python3.13
-pkgver=3.13.0b4
+pkgver=3.13.0rc1
 pkgrel=1
-_pyver=3.13.0
+_pyver=3.13.0rc1
 _pybasever=3.13
 _pymajver=3
-pkgdesc="Major release 3.13 of the Python high-level programming language"
+pkgdesc="First release candidate of the Python programming language"
 arch=('i686' 'x86_64')
 license=('PSF-2.0')
 url="https://www.python.org/"
@@ -15,7 +15,7 @@ depends=('bzip2' 'expat' 'gdbm' 'libffi' 'libnsl' 'libxcrypt' 'openssl' 'zlib' '
 makedepends=('bluez-libs' 'mpdecimal' 'gdb')
 optdepends=('sqlite' 'mpdecimal: for decimal' 'xz: for lzma' 'tk: for tkinter')
 source=(https://www.python.org/ftp/python/${_pyver}/Python-${pkgver}.tar.xz)
-md5sums=('4a4d75794a6c01fe0845ce224dda2e26')
+md5sums=('4a4d75794a6c01fe0845ce224dda2e26: xz', '7ad09657a223706c5c45240c0199e7cf: gzip')
 
 prepare() {
   cd "${srcdir}/Python-${pkgver}"
