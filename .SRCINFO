@@ -1,6 +1,6 @@
 pkgbase = python3.13
-	pkgdesc = First release candidate of the Python programming language
-	pkgver = 3.13.0rc1
+	pkgdesc = Python programming language interpreter
+	pkgver = 3.13.0
 	pkgrel = 1
 	url = https://www.python.org/
 	arch = i686
@@ -24,7 +24,7 @@ pkgbase = python3.13
 	optdepends = mpdecimal: for decimal
 	optdepends = xz: for lzma
 	optdepends = tk: for tkinter
-	source = https://www.python.org/ftp/python/3.13.0/Python-3.13.0rc1.tar.xz
-	md5sums = 9213ecfedc510ac2a14c0eeea96baf02
+	source = https://www.python.org/ftp/python/3.13.0/Python-3.13.0.tar.xz
+	md5sums = 726e5b829fcf352326874c1ae599abaa
 
 pkgname = python3.13

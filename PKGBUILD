@@ -1,13 +1,12 @@
-# Maintainer: Tobias Kunze <r@rixx.de>
-# Maintained at https://github.com/rixx/pkgbuilds, feel free to submit patches
+# Maintainer: sneekyfoxx <sneekyfoxx09@gmail.com>
 
 pkgname=python3.13
-pkgver=3.13.0rc1
+pkgver=3.13.0
 pkgrel=1
 _pyver=3.13.0
 _pybasever=3.13
 _pymajver=3
-pkgdesc="First release candidate of the Python programming language"
+pkgdesc="Python programming language interpreter"
 arch=('i686' 'x86_64')
 license=('PSF-2.0')
 url="https://www.python.org/"
@@ -15,7 +14,7 @@ depends=('bzip2' 'expat' 'gdbm' 'libffi' 'libnsl' 'libxcrypt' 'openssl' 'zlib' '
 makedepends=('bluez-libs' 'mpdecimal' 'gdb')
 optdepends=('sqlite' 'mpdecimal: for decimal' 'xz: for lzma' 'tk: for tkinter')
 source=(https://www.python.org/ftp/python/${_pyver}/Python-${pkgver}.tar.xz)
-md5sums=('9213ecfedc510ac2a14c0eeea96baf02')
+md5sums=('726e5b829fcf352326874c1ae599abaa')
 
 prepare() {
   cd "${srcdir}/Python-${pkgver}"
@@ -65,7 +64,7 @@ package() {
   rm -f "${pkgdir}/usr/share/man/man1/python${_pymajver}.1"
 
   # Clean-up reference to build directory
-  sed -i "s|$srcdir/Python-${pkgver}:||" "$pkgdir/usr/lib/python${_pybasever}t/config-${_pybasever}t-${CARCH}-linux-gnu/Makefile"
+  sed -i "s|$srcdir/Python-${pkgver}:||" "$pkgdir/usr/lib/python${_pybasever}/config-${_pybasever}-${CARCH}-linux-gnu/Makefile"
 
   # Add useful scripts FS#46146
   install -dm755 "${pkgdir}"/usr/lib/python${_pybasever}/Tools/{i18n,scripts}
