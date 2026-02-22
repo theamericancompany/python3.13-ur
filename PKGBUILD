@@ -66,7 +66,7 @@ _pyminver=13
 _pkgver="${_pymajver}.${_pyminver}"
 pkgname="${_pkg}${_pkgver}"
 pkgver="${_pkgver}.0"
-pkgrel=5
+pkgrel=6
 _pyver="${pkgver}"
 _pybasever="${_pkgver}"
 _pkgdesc=(
@@ -142,13 +142,36 @@ prepare() {
 build() {
   local \
     _cflags=() \
+    _cc \
     _enable_experimental_jit \
     _configure_opts=() \
+    _clang18 \
     _msg=()
+  _cc="${_c_compiler}"
   if [[ "${_jit}" == "true" ]]; then
     _enable_experimental_jit="yes"
+    _clang18="$(
+      command \
+        -v \
+        "clang-18" || \
+      true)"
+    if [[ "${_c_compiler}" == "clang" ]]; then
+      if [[ "${_clang18}" == "" ]]; then
+         mkdir \
+           "bin"
+        _clang="$(
+          command \
+            -v \
+            "clang" || \
+          true)"
+        ln \
+          -s \
+	  "${clang}" \
+	  "bin/clang-18"
+      fi
+    fi
   elif [[ "${_jit}" == "false" ]]; then
-    _enable_experimental_jit="yes"
+    _enable_experimental_jit="no"
   else
     _msg=(
       "Unknown value '${_jit}'"
@@ -183,9 +206,15 @@ build() {
   )
   cd \
     "${srcdir}/${_tarname}"
-  CFLAGS="${_cflags[*]}"
+  export \
+    CFLAGS="${_cflags[*]}" \
+    CC="${_cc}"
+  CC="${_cc}" \
+  CFLAGS="${_cflags[*]}" \
   ./configure \
     "${_configure_opts[@]}"
+  CC="${_cc}" \
+  CFLAGS="${_cflags[*]}" \
   make \
     EXTRA_CFLAGS="$CFLAGS"
 }
